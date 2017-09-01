@@ -1,0 +1,47 @@
+﻿@model wierdVSerror.Models.Family
+
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FamilyName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FamilyName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FamilyName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row form-inline">
+            <div class="card" style="width: 100%;">
+                <ul class="list-group list-group-flush">
+                    @for (int i = 0; i < Model.Children.Count; i++)
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Children[i].Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Children[i].Name, new { htmlAttributes = new { @class = "form-control" } })&nbsp;
+                                <button class="btn btn-sm btn-outline-primary float-right" name="btn" type="submit" value="@i">x</button>
+                            </div>
+                        </div>
+                        <p>&nbsp;</p>
+
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+
+
